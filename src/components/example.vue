@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div style="text-align:center">
     <img @click="startPhoto"
-         :src="bigSrcObj.url"
+         :src="imgUrl"
          alt="">
     <el-dialog title=""
                :visible.sync="showPhotoDialog"
@@ -13,14 +13,14 @@
            :style="{'width':(style.mywidth+'px'),'height':(style.myheight+'px'),'overflow':'hidden'}">
 
         <img v-show="style.display"
-             :src="bigSrcObj.url"
+             :src="imgUrl"
              :style="{'width':'100%;','height':'100%','transform':'scale'+'('+style.scale+')','position':'relative','left':style.left,'top':style.top}">
       </div>
 
       <!-- 真实的照片 -->
       <img id="wheelImg"
            style="opacity:0; width:100%;height:auto"
-           :src="bigSrcObj.url"
+           :src="imgUrl"
            @mouseenter="openWheel"
            @mouseleave="closeWheel"
            @mousedown="openDrag">
@@ -40,9 +40,14 @@
 <script>
 export default {
   name: 'HelloWorld',
+  props: {
+    imgUrl: {
+      type: String,
+      default: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4018557288,1217151095&fm=26&gp=0.jpg'
+    },
+  },
   data () {
     return {
-      bigSrcObj: { url: 'http://img1.imgtn.bdimg.com/it/u=4018557288,1217151095&fm=26&gp=0.jpg' },
       showPhotoDialog: false,
       style: {
         mywidth: 400,
@@ -157,9 +162,6 @@ export default {
       this.showPhotoDialog = true
     }
   },
-  bigSrcObj: {
-    url: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4018557288,1217151095&fm=26&gp=0.jpg'
-  }
 }
 </script>
 
